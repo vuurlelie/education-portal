@@ -1,0 +1,56 @@
+# Build output
+**/bin/
+**/obj/
+**/publish/
+artifacts/
+
+# IDE / Editor
+.vs/
+.vscode/
+.idea/
+_ReSharper*/
+_ReSharper.Caches/
+*.sln.docstates
+*.DotSettings.user
+
+# User-specific / machine-specific
+*.user
+*.rsuser
+*.suo
+*.userosscache
+
+# Logs / caches
+*.log
+*.pidb
+*.svclog
+*.pdb
+*.cache
+
+# Test and Coverage
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+coverage*/
+.coverage
+
+# NuGet
+*.nupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Local DB files
+*.mdf
+*.ldf
+*.ndf
+
+# App settings 
+appsettings.*.Local.json
+**/appsettings.Development.json
+
+

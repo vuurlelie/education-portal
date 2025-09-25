@@ -1,0 +1,57 @@
+﻿@using EducationPortal.Presentation.Extensions
+@model IReadOnlyList<EducationPortal.Presentation.ViewModels.Skills.SkillListItemViewModel>
+@{
+    ViewData["Title"] = "Skills";
+}
+
+<h2 class="mb-3">Skills</h2>
+
+@if (User.IsAuthenticated())
+{
+    <div class="mb-3">
+        <a href="#"
+           class="btn btn-primary"
+           data-modal-url="@Url.Action("Create", "Skills")"
+           data-modal-title="Create skill">New skill</a>
+    </div>
+}
+
+<table class="table table-striped align-middle">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th class="w-210"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var skill in Model)
+        {
+            <tr>
+                <td>@skill.Name</td>
+                <td>@skill.Description</td>
+                <td class="text-end">
+                    <a class="btn btn-sm btn-outline-primary me-2"
+                       asp-action="Details" asp-route-id="@skill.Id">Details</a>
+
+                    @if (User.IsAuthenticated())
+                    {
+                        <a href="#"
+                           class="btn btn-sm btn-outline-success me-2"
+                           data-modal-url="@Url.Action("Edit", "Skills", new { id = skill.Id })"
+                           data-modal-title="Edit skill">Edit</a>
+
+                        <form asp-action="Delete"
+                              asp-route-id="@skill.Id"
+                              method="post"
+                              class="d-inline"
+                              asp-antiforgery="true"
+                              onsubmit="return confirm('Delete this skill?');">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

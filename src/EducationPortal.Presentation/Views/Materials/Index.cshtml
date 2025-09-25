@@ -1,0 +1,77 @@
+﻿@using EducationPortal.Presentation.Extensions
+@model IReadOnlyList<EducationPortal.Presentation.ViewModels.Materials.MaterialListItemViewModel>
+@{
+    ViewData["Title"] = "Materials";
+    string? selectedType = Context.Request.Query["type"];
+    string Active(string? tab) => string.Equals(selectedType, tab, StringComparison.OrdinalIgnoreCase) ? "active" : "";
+    bool showFormatColumn = string.Equals(selectedType, "Book", StringComparison.OrdinalIgnoreCase);
+}
+
+<h2 class="mb-3">Materials</h2>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <ul class="nav nav-pills">
+        <li class="nav-item"><a class="nav-link @Active(null)" href="@Url.Action("Index", "Materials")">All</a></li>
+        <li class="nav-item"><a class="nav-link @Active("Video")" href="@Url.Action("Index", "Materials", new { type = "Video" })">Video</a></li>
+        <li class="nav-item"><a class="nav-link @Active("Book")" href="@Url.Action("Index", "Materials", new { type = "Book" })">Book</a></li>
+        <li class="nav-item"><a class="nav-link @Active("Article")" href="@Url.Action("Index", "Materials", new { type = "Article" })">Article</a></li>
+    </ul>
+
+    @if (User.IsAuthenticated())
+    {
+        <a href="#"
+           class="btn btn-primary"
+           data-modal-url="@Url.Action("Create", "Materials")"
+           data-modal-title="Create material">New material</a>
+    }
+</div>
+
+<table class="table table-striped align-middle">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Type</th>
+            @if (showFormatColumn)
+            {
+                <th>Format</th>
+            }
+            <th class="text-end w-240"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var material in Model)
+        {
+            <tr>
+                <td>@material.Title</td>
+                <td>@material.Type</td>
+
+                @if (showFormatColumn)
+                {
+                    <td>@material.FormatName</td>
+                }
+
+                <td class="text-end">
+                    <a class="btn btn-sm btn-outline-primary me-2"
+                       asp-action="Details" asp-route-id="@material.Id">Details</a>
+
+                    @if (User.IsAuthenticated())
+                    {
+                        <a href="#"
+                           class="btn btn-sm btn-outline-success me-2"
+                           data-modal-url='@Url.Action("Edit", "Materials", new { id = material.Id })'
+                           data-modal-title="Edit material">Edit</a>
+
+                        <form asp-action="Delete"
+                              asp-route-id="@material.Id"
+                              method="post"
+                              class="d-inline"
+                              asp-antiforgery="true"
+                              onsubmit="return confirm('Delete this material?');">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,95 @@
+html, body {
+    height: 100%;
+}
+
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 0px;
+}
+
+.form-floating > .form-control-plaintext::placeholder,
+.form-floating > .form-control::placeholder {
+    color: var(--bs-secondary-color);
+    text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder,
+.form-floating > .form-control:focus::placeholder {
+    text-align: start;
+}
+
+.home-carousel-img {
+    height: 420px;
+    object-fit: cover;
+}
+
+.navbar-brand {
+    font-weight: 600;
+    letter-spacing: .2px;
+}
+
+footer small {
+    font-size: .9rem;
+}
+
+.scroll-panel-260 {
+    max-height: 260px;
+    overflow: auto;
+}
+
+.scroll-panel-220 {
+    max-height: 220px;
+    overflow: auto;
+}
+
+.w-120 {
+    width: 120px !important;
+}
+
+.w-140 {
+    width: 140px !important;
+}
+
+.w-210 {
+    width: 210px !important;
+}
+
+.w-240 {
+    width: 240px !important;
+}
+
+.w-340 {
+    width: 340px !important;
+}
+
+.list-item-justified {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.badge-right {
+    float: right;
+}

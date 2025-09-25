@@ -1,0 +1,105 @@
+﻿@model EducationPortal.Presentation.ViewModels.Materials.MaterialFormViewModel
+@{
+    bool showVideo = string.Equals(Model.Type, "Video", StringComparison.Ordinal);
+    bool showBook = string.Equals(Model.Type, "Book", StringComparison.Ordinal);
+    bool showArticle = string.Equals(Model.Type, "Article", StringComparison.Ordinal);
+}
+
+<input type="hidden" asp-for="Id" />
+
+<div class="mb-3">
+    <label asp-for="Type" class="form-label">Type</label>
+    <select asp-for="Type" class="form-select" id="material-type">
+        <option value="Video" selected="@(Model.Type == "Video")">Video</option>
+        <option value="Book" selected="@(Model.Type == "Book")">Book</option>
+        <option value="Article" selected="@(Model.Type == "Article")">Article</option>
+    </select>
+    <span asp-validation-for="Type" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Title" class="form-label">Title</label>
+    <input asp-for="Title" class="form-control" />
+    <span asp-validation-for="Title" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Description" class="form-label">Description</label>
+    <textarea asp-for="Description" class="form-control"></textarea>
+    <span asp-validation-for="Description" class="text-danger"></span>
+</div>
+
+<div data-section="video" class="type-section @(showVideo ? "" : "d-none")">
+    <div class="row g-3 mb-3">
+        <div class="col">
+            <label asp-for="DurationSeconds" class="form-label">Duration (sec)</label>
+            <input asp-for="DurationSeconds" class="form-control" />
+            <span asp-validation-for="DurationSeconds" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="WidthPx" class="form-label">Width (px)</label>
+            <input asp-for="WidthPx" class="form-control" />
+            <span asp-validation-for="WidthPx" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="HeightPx" class="form-label">Height (px)</label>
+            <input asp-for="HeightPx" class="form-control" />
+            <span asp-validation-for="HeightPx" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+
+<div data-section="book" class="type-section @(showBook ? "" : "d-none")">
+    <div class="mb-3">
+        <label asp-for="Authors" class="form-label">Authors</label>
+        <input asp-for="Authors" class="form-control" />
+        <span asp-validation-for="Authors" class="text-danger"></span>
+    </div>
+    <div class="row g-3 mb-3">
+        <div class="col">
+            <label asp-for="Pages" class="form-label">Pages</label>
+            <input asp-for="Pages" class="form-control" />
+            <span asp-validation-for="Pages" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="PublicationYear" class="form-label">Publication year</label>
+            <input asp-for="PublicationYear" class="form-control" />
+            <span asp-validation-for="PublicationYear" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="FormatId" class="form-label">Format</label>
+            <select asp-for="FormatId" asp-items="Model.FormatOptions" class="form-select"></select>
+            <span asp-validation-for="FormatId" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+
+<div data-section="article" class="type-section @(showArticle ? "" : "d-none")">
+    <div class="row g-3 mb-3">
+        <div class="col">
+            <label asp-for="PublishedAt" class="form-label">Published at</label>
+            <input asp-for="PublishedAt" class="form-control" />
+            <span asp-validation-for="PublishedAt" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="SourceUrl" class="form-label">Source URL</label>
+            <input asp-for="SourceUrl" class="form-control" />
+            <span asp-validation-for="SourceUrl" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Attach to courses</label>
+    <div class="border rounded p-2 scroll-panel-220">
+        @foreach (var option in Model.CourseOptions)
+        {
+            var courseId = int.Parse(option.Value);
+            var isChecked = Model.SelectedCourseIds?.Contains(courseId) ?? false;
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="SelectedCourseIds" value="@option.Value" checked="@(isChecked)" id="course_@option.Value" />
+                <label class="form-check-label" for="course_@option.Value">@option.Text</label>
+            </div>
+        }
+    </div>
+</div>

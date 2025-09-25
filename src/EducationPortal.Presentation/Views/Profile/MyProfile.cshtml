@@ -1,0 +1,55 @@
+﻿@model EducationPortal.Presentation.ViewModels.Profile.UserProfileViewModel
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+<h2 class="mb-3">My Profile</h2>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="text-muted">Full name</div>
+                <div class="fw-semibold">@Model.FullName</div>
+                <div class="text-muted mt-2">Email</div>
+                <div class="fw-semibold">@Model.Email</div>
+                <div class="text-muted mt-2">Joined</div>
+                <div class="fw-semibold">@Model.CreatedAt.ToString("yyyy-MM-dd HH:mm")</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="row g-3">
+            <div class="col-sm-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <div class="text-muted mb-1">In progress</div>
+                        <div class="display-6">@Model.InProgressCoursesCount</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <div class="text-muted mb-1">Completed</div>
+                        <div class="display-6">@Model.CompletedCoursesCount</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <div class="text-muted mb-1">Skills</div>
+                        <div class="display-6">@Model.SkillsCount</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-primary me-2" asp-action="MyCourses">My Courses</a>
+    <a class="btn btn-primary me-2" asp-action="MySkills">My Skills</a>
+</div>
