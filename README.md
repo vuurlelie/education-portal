@@ -1,3 +1,5 @@
+![.NET CI](https://github.com/vuurlelie/EducationPortal/actions/workflows/dotnet-ci.yml/badge.svg)
+
 # EducationPortal
 
 An ASP.NET Core 9 MVC education portal to help users upskill through courses composed of mixed materials (videos, ebooks, articles). Progress is tracked per material across courses, and completing a course awards skills (incrementing level if already owned).
