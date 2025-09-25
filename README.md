@@ -1,4 +1,4 @@
-![.NET CI](https://github.com/<your-username>/EducationPortal/actions/workflows/dotnet-ci.yml/badge.svg)
+![.NET CI](https://github.com/vuurlelie/EducationPortal/actions/workflows/dotnet-ci.yml/badge.svg)
 
 # EducationPortal
 
