@@ -1,0 +1,24 @@
+name: .NET CI
+on: [push, pull_request]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - run: dotnet restore
+
+      - run: dotnet build --no-restore -c Release
+
+      - run: dotnet test tests/EducationPortal.BusinessLogic.UnitTests --no-build -c Release --collect:"XPlat Code Coverage"
+
+      - name: Upload coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: '**/TestResults/**/*'
