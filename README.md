@@ -1,4 +1,4 @@
-![.NET CI](https://github.com/vuurlelie/EducationPortal/actions/workflows/dotnet-ci.yml)
+[![.NET CI](https://github.com/vuurlelie/education-portal/actions/workflows/dotnet-ci.yml/badge.svg?branch=main)](https://github.com/vuurlelie/education-portal/actions/workflows/dotnet-ci.yml)
 
 # EducationPortal
 
