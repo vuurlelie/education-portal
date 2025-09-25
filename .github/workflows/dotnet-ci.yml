@@ -1,24 +1,37 @@
 name: .NET CI
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
 
 jobs:
-  build-test:
-    runs-on: ubuntu-latest
+  build_test:
+    runs-on: windows-latest   
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup .NET
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
 
-      - run: dotnet restore
+      - name: Show SDK info
+        run: dotnet --info
 
-      - run: dotnet build --no-restore -c Release
+      - name: Restore
+        run: dotnet restore EducationPortal.sln
 
-      - run: dotnet test tests/EducationPortal.BusinessLogic.UnitTests --no-build -c Release --collect:"XPlat Code Coverage"
+      - name: Build
+        run: dotnet build EducationPortal.sln -c Release --no-restore
 
-      - name: Upload coverage
+      - name: Test
+        run: dotnet test EducationPortal.sln -c Release --no-build --collect:"XPlat Code Coverage" --logger "trx;LogFileName=test-results.trx"
+
+      - name: Upload test results
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: coverage
-          path: '**/TestResults/**/*'
+          name: test-results
+          path: |
+            **/TestResults/**
+            **/*.trx
